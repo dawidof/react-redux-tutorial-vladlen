@@ -1,4 +1,11 @@
-import { CREATE_POST, FETCH_POSTS, HIDE_LOADER, SHOW_LOADER } from "./types";
+import {
+  CREATE_POST,
+  FETCH_POSTS,
+  HIDE_ERROR,
+  HIDE_LOADER,
+  SHOW_ERROR,
+  SHOW_LOADER
+} from "./types";
 
 export function createPost(post) {
   return {
@@ -19,14 +26,38 @@ export function hideLoader() {
   };
 }
 
+export function showError(text) {
+  return (dispatch) => {
+    dispatch({
+      type: SHOW_ERROR,
+      payload: text
+    });
+
+    setTimeout(() => {
+      dispatch(hideError());
+    }, 3000);
+  };
+}
+
+export function hideError() {
+  return {
+    type: HIDE_ERROR
+  };
+}
+
 export function fetchPosts() {
   return async (dispatch) => {
-    dispatch(showLoader());
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/todos?_limit=5"
-    );
-    const json = await response.json();
-    dispatch({ type: FETCH_POSTS, payload: json });
-    dispatch(hideLoader());
+    try {
+      dispatch(showLoader());
+      const response = await fetch(
+        "https://sjsonplaceholder.typicode.com/todos?_limit=5"
+      );
+      const json = await response.json();
+      dispatch({ type: FETCH_POSTS, payload: json });
+      dispatch(hideLoader());
+    } catch (e) {
+      dispatch(showError("Что-то пошло не так"));
+      dispatch(hideLoader());
+    }
   };
 }

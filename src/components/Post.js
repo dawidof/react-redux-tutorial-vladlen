@@ -1,5 +1,11 @@
-// import React from "react";
+import React from "react";
 
-export default const() => {
-  return <h3>Fetched Posts</h3>;
+export default ({ post }) => {
+  return (
+    <div className="card">
+      <div className="card-body">
+        <div className="card-title">{post}</div>
+      </div>
+    </div>
+  );
 };

@@ -14,10 +14,12 @@ export default function App() {
       </div>
       <div className="row">
         <div className="col">
-          <Posts />
+          <h2>Синхронные посты</h2>
+          <Posts posts={[1, 2, 3]} />
         </div>
         <div className="col">
-          <FetchedPosts />
+          <h2>Асинхронные посты</h2>
+          <FetchedPosts posts={[]} />
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import {
   FETCH_POSTS,
   HIDE_ERROR,
   HIDE_LOADER,
+  REQUEST_POSTS,
   SHOW_ERROR,
   SHOW_LOADER
 } from "./types";
@@ -46,18 +47,21 @@ export function hideError() {
 }
 
 export function fetchPosts() {
-  return async (dispatch) => {
-    try {
-      dispatch(showLoader());
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos?_limit=5"
-      );
-      const json = await response.json();
-      dispatch({ type: FETCH_POSTS, payload: json });
-      dispatch(hideLoader());
-    } catch (e) {
-      dispatch(showError("Что-то пошло не так"));
-      dispatch(hideLoader());
-    }
+  return {
+    type: REQUEST_POSTS
   };
+  // return async (dispatch) => {
+  //   try {
+  //     dispatch(showLoader());
+  //     const response = await fetch(
+  //       "https://jsonplaceholder.typicode.com/todos?_limit=5"
+  //     );
+  //     const json = await response.json();
+  //     dispatch({ type: FETCH_POSTS, payload: json });
+  //     dispatch(hideLoader());
+  //   } catch (e) {
+  //     dispatch(showError("Что-то пошло не так"));
+  //     dispatch(hideLoader());
+  //   }
+  // };
 }

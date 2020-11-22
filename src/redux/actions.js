@@ -50,7 +50,7 @@ export function fetchPosts() {
     try {
       dispatch(showLoader());
       const response = await fetch(
-        "https://sjsonplaceholder.typicode.com/todos?_limit=5"
+        "https://jsonplaceholder.typicode.com/todos?_limit=5"
       );
       const json = await response.json();
       dispatch({ type: FETCH_POSTS, payload: json });

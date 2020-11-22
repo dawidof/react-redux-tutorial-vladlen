@@ -7,8 +7,9 @@ import thunk from "redux-thunk";
 
 import App from "./App";
 import { rootReducer } from "./redux/rootReducer";
+import { forbiddenWordsMiddleware } from "./redux/middleware";
 
-const middleware = [thunk, logger];
+const middleware = [thunk, logger, forbiddenWordsMiddleware];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
